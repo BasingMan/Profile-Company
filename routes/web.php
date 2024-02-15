@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::name('frontend.')->group(function () {
+    include_once('frontend.php');
+});
+
+Route::name('backend.')->group(function () {
+    include_once('backend.php');
 });
