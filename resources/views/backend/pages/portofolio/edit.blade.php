@@ -5,7 +5,7 @@
         <div class="h3">Add Portofolio</div>
     </div>
     <div class="card-body">
-        <form action="{{ route('backend.update', ['id'=>$portofolio->id]) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('backend.porto.update', ['id'=>$portofolio->id]) }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-12">

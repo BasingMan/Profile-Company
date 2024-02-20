@@ -50,7 +50,7 @@ class PortofolioController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $file->move('uploads/', $filename);
+            $file->move('uploads/porto/', $filename);
             $porto->image = $filename;
         }else{
             return redirect()->back()->with('error', 'Error uploading image.');
@@ -58,7 +58,7 @@ class PortofolioController extends Controller
 
         $porto->save();
 
-        return redirect()->route('backend.index')->with('status','Portofolio Updated');
+        return redirect()->route('backend.porto.index')->with('status','Portofolio Updated');
     }
 
     /**
@@ -98,13 +98,13 @@ class PortofolioController extends Controller
             $oldImage = $porto->image;
             if ($oldImage) {
 
-                File::delete('uploads/' . $oldImage);
+                File::delete('uploads/porto' . $oldImage);
             }
     
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/', $filename);
+            $file->move('uploads/porto', $filename);
             $porto->image = $filename;
         }
     
@@ -116,7 +116,7 @@ class PortofolioController extends Controller
 
         $porto->save();
     
-        return redirect()->route('backend.index')->with('status', 'Portofolio Updated');
+        return redirect()->route('backend.porto.index')->with('status', 'Portofolio Updated');
     }
 
     /**
@@ -126,6 +126,6 @@ class PortofolioController extends Controller
     {
         Portofolio::find($id)->delete();
 
-        return redirect()->route('backend.index')->with('status', 'Portofolio Deleted');
+        return redirect()->route('backend.porto.index')->with('status', 'Portofolio Deleted');
     }
 }

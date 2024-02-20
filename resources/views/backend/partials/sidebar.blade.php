@@ -11,21 +11,27 @@
                 </li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="index.html">
+                    <a class="sidebar-link" href="#">
                         <i class="align-middle" data-feather="sliders"></i> <span
                             class="align-middle">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('backend.index') }}">
+                    <a class="sidebar-link" href="{{ route('backend.porto.index') }}">
                         <i class="align-middle" data-feather="user"></i> <span class="align-middle">Portofolio</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('backend.add') }}">
-                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Add Portofolio</span>
+                    <a class="sidebar-link" href="{{ route('backend.testi.index') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Testimoni</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('backend.slider.index') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Slider</span>
                     </a>
                 </li>
 
