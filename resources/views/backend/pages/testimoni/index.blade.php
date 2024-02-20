@@ -30,7 +30,7 @@
                             <th>Nama</th>
                             <th>Company</th>
                             <th>Rating</th>
-                            <th>Aksi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

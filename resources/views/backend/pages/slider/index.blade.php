@@ -19,8 +19,8 @@
 </style>
 <div class="card">
     <div class="card-body">
-        <h6 class="card-title">slidermoni Management</h6>
-        <p class="text-muted mb-3">slidermoni<code>.table</code></p>
+        <h6 class="card-title">Slider Management</h6>
+        <p class="text-muted mb-3">Slider<code>.table</code></p>
         <div class="table-responsive">
             <a href="{{ route('backend.slider.add') }}" class="button-like">Add Slider</a>
                 <table class="table">
@@ -31,7 +31,7 @@
                             <th>Subtitle</th>
                             <th>Image</th>
                             <th>Link</th>
-                            <th>Aksi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
