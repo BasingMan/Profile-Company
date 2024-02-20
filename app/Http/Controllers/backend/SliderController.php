@@ -115,7 +115,7 @@ class SliderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Slider $slider, $id)
+    public function destroy($id)
     {
         Slider::find($id)->delete();
 
