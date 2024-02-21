@@ -35,8 +35,11 @@ class TestimoniController extends Controller
             'name' => 'required',
             'company' => 'required',
             'rating' => 'required',
-            'image_testi' => 'nullable|file|mimes:png, jpg, jpeg,',
+            'image_testi' => 'nullable|image|mimes:png, jpg, jpeg,',
             'testimoni' => 'required',
+        ],[
+            'image_testi.image' => 'it needs to be an image file',
+            'image_testi.mimes' => 'the file must be png/jpg/jpeg',
         ]);
         
         $testi = new Testimoni;
@@ -91,8 +94,11 @@ class TestimoniController extends Controller
             'name' => 'required',
             'company' => 'required',
             'rating' => 'required',
-            'image_testi' => 'nullable|file|mimes:png,jpg,jpeg',
+            'image_testi' => 'nullable|mimes:png,jpg,jpeg',
             'testimoni' => 'required', 
+        ],[
+            'image_testi.image' => 'it needs to be an image file',
+            'image_testi.mimes' => 'the file must be png/jpg/jpeg',
         ]);
     
         $testi = Testimoni::findOrFail($id);

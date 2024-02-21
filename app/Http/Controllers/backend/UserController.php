@@ -43,6 +43,8 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string',
             
+        ],[
+            'role_id.required' => 'must select role',
         ]);
 
         $user = new User();
@@ -55,7 +57,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('backend.user.index');
+        return redirect()->route('backend.user.index')->with('status', 'User added');
     }
 
     /**
@@ -100,7 +102,7 @@ class UserController extends Controller
     
         $user->save();
     
-        return redirect()->route('backend.user.index');
+        return redirect()->route('backend.user.index')->with('status', 'User is Updated');
     }
 
     /**

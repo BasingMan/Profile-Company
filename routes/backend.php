@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\ArtikelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\PortofolioController;
 use App\Http\Controllers\backend\SliderController;
@@ -50,6 +51,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
         Route::post('//update/{id}', [UserController::class, 'update'])->name('user.update');
         Route::get('/delete/{id}',[UserController::class, 'destroy'])->name('user.delete');
+    });
+
+    //ARTICLE
+    Route::group(['prefix' => 'article'], function() {
+        Route::get('/', [ArtikelController::class, 'index'])->name('art.index');
+        Route::get('/add', [ArtikelController::class, 'create'])->name('art.add');
+        Route::post('/store', [ArtikelController::class, 'store'])->name('art.store');
+        Route::get('/edit/{id}', [ArtikelController::class, 'edit'])->name('art.edit');
+        Route::post('//update/{id}', [ArtikelController::class, 'update'])->name('art.update');
+        Route::get('/delete/{id}',[ArtikelController::class, 'destroy'])->name('art.delete');
+        Route::get('/show/{id}', [ArtikelController::class, 'show'])->name('art.show');
     });
 
 });
