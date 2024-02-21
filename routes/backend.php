@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\PortofolioController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\TestimoniController;
+use App\Http\Controllers\Backend\UserController;
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
@@ -39,6 +40,16 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
         Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
         Route::get('/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
+    });
+
+    //USER
+    Route::group(['prefix' => 'user'], function(){
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/add', [UserController::class, 'create'])->name('user.add');
+        Route::post('/store', [UserController::class, 'store'])->name('user.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::post('//update/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::get('/delete/{id}',[UserController::class, 'destroy'])->name('user.delete');
     });
 
 });

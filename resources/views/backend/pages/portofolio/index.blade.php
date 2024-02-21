@@ -31,7 +31,7 @@
                             <th>Link</th>
                             <th>Image</th>
                             <th>Deskripsi</th>
-                            <th>Aksi    </th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
