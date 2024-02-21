@@ -42,8 +42,8 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-blank.html">
-                        <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
+                    <a class="sidebar-link" href="{{ route('backend.art.index') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Article</span>
                     </a>
                 </li>
 

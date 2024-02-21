@@ -11,18 +11,30 @@
                 <div class="col-12">
                     <div class="form-group"><label for="nama">Title</label>
                     <input type="text" name="title" id="nama" class="form-control"></div>
+                    @error('title')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-12">
                     <div class="form-group"><label for="e">Subtitle</label>
                     <input type="text" name="subtitle" id="e" class="form-control"></div>
+                    @error('subtitle')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-12">
                     <div class="form-group"><label for="p">link</label>
                     <input type="text" name="link" id="p" class="form-control"></div>
+                    @error('link')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-12">
                     <div class="form-group"><label for="i">Image</label>
                     <input type="file" name="gambar" id="i" class="form-control"></div>
+                    @error('gambar')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-12">
                     <div class="d-flex"><button class="btn btn-primary">Save</button></div>

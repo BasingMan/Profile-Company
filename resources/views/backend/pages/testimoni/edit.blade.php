@@ -101,14 +101,24 @@
                             <div class="col-12">
                                 <div class="form-group"><label for="nama">Name</label>
                                 <input type="text" name="name" id="nama" class="form-control" value="{{ $tes->name }}"></div>
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                
                             </div>
                             <div class="col-12">
                                 <div class="form-group"><label for="c">Company</label>
                                 <input type="text" name="company" id="c" class="form-control" value="{{ $tes->company }}"></div>
+                                @error('company')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-12">
                                 <div class="form-group"><label for="i">Image</label>
                                 <input type="file" name="image_testi" id="i" class="form-control"></div>
+                                @error('image_testi')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                             <p class="font-weight-bold ">Rating</p>
                             <div class="form-group row">
@@ -130,6 +140,9 @@
                         <div class="form-group row mt-4">
                         <div class="col">
                             <textarea class="form-control" name="testimoni" rows="6 " placeholder="Write Your Testimoni" maxlength="200">{{ $tes->testimoni }}</textarea>
+                            @error('testimoni')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         </div>
                         <div class="mt-3 text-right">
