@@ -6,11 +6,24 @@ use App\Http\Controllers\backend\PortofolioController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\TestimoniController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\AuthController;
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('backend.layouts.admin_layout');
     })->name('dashboard');
+
+    // LOGIN
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/login', [AuthController::class, 'loginForm'])->name('login'); 
+        Route::post('/login', [AuthController::class, 'login'])->name('login.post'); 
+    });
+
+    // LOGOUT
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
+    });
+
     
     //PORTOFOLIO
     Route::group(['prefix' => 'portofolio'], function () {
