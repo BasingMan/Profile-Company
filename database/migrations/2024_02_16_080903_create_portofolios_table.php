@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('image')->nullable();
-            $table->integer('link');
+            $table->string('link');
             $table->string('description');
             $table->timestamps();
         });
