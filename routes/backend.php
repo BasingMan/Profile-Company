@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth.admin'], function () {
         Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
         Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
         Route::get('/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
+        Route::get('/show/{id}', [SliderController::class, 'show'])->name('slider.show');
     });
 
     // Group routes for User module

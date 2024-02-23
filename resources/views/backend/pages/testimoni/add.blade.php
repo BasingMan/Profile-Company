@@ -127,14 +127,14 @@
                     {{ csrf_field() }}
             
                         <div class="col-12">
-                            <div class="form-group"><label for="nama">Name</label>
+                            <div class="form-group"><label for="nama">Name<span class="text-danger">*</span></label>
                             <input type="text" name="name" id="nama" class="form-control"></div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-12">
-                            <div class="form-group"><label for="c">Company</label>
+                            <div class="form-group"><label for="c">Company<span class="text-danger">*</span></label>
                             <input type="text" name="company" id="c" class="form-control"></div>
                             @error('company')
                                 <span class="text-danger">{{ $message }}</span>
@@ -147,7 +147,7 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
-                        <p class="font-weight-bold ">Rating</p>
+                        <p class="font-weight-bold ">Rating<span class="text-danger">*</span></p>
                         <div class="form-group row">
                         <div class="col">
                         <div class="rate">
@@ -166,6 +166,7 @@
                     </div>
                     <div class="form-group row mt-4">
                     <div class="col">
+                        <label for="testimoni">Testimoni<span class="text-danger">*</span></label>
                         <textarea class="form-control" name="testimoni" rows="6 " placeholder="Write Your Testimoni" maxlength="200"></textarea>
                         @error('testimoni')
                             <span class="text-danger">{{ $message }}</span>

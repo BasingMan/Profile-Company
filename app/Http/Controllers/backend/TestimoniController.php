@@ -35,34 +35,31 @@ class TestimoniController extends Controller
             'name' => 'required',
             'company' => 'required',
             'rating' => 'required',
-            'image_testi' => 'nullable|image|mimes:png, jpg, jpeg,',
+            'image_testi' => 'nullable|mimes:png,jpg,jpeg',
             'testimoni' => 'required',
-        ],[
-            'image_testi.image' => 'it needs to be an image file',
-            'image_testi.mimes' => 'the file must be png/jpg/jpeg',
+        ], [
+            'image_testi.mimes' => 'The file must be png/jpg/jpeg',
         ]);
         
         $testi = new Testimoni;
-
+        
         $testi->name = $request->input('name');
         $testi->company = $request->input('company');
         $testi->rating = $request->input('rating');
         $testi->testimoni = $request->input('testimoni');
-
-        if($request->hasFile('image_testi'))
-        {
+        
+        if ($request->hasFile('image_testi')) {
             $file = $request->file('image_testi');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('uploads/testi/', $filename);
             $testi->image_testi = $filename;
-        }else{
-            return redirect()->back()->with('error', 'Error uploading Image_testi.');
         }
-
+        
         $testi->save();
-
-        return redirect()->route('backend.testi.index')->with('status','Testimoni Updated');
+        
+        return redirect()->route('backend.testi.index')->with('status', 'Testimoni Updated');
+        
     }
 
     /**

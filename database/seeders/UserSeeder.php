@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
 
         $adminRoleId = Role::where('name', 'Admin')->value('id');
-        $userRoleId = Role::where('name', 'User')->value('id');
+        //$userRoleId = Role::where('name', 'User')->value('id');
 
         $userData = [
             'name' => 'Admin',
