@@ -9,14 +9,14 @@
             @csrf
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group"><label for="nama">Name</label>
+                    <div class="form-group"><label for="nama">Name<span class="text-danger">*</span></label>
                     <input type="text" name="name" id="nama" class="form-control"></div>
                     @error('name')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="form-group"><label for="nama">Role</label>
+                    <div class="form-group"><label for="nama">Role<span class="text-danger">*</span></label>
                     <select class="form-control" name="role_id" id="">
                         <option selected disabled>Select Role</option>
                         @foreach ($roles as $role)
@@ -28,14 +28,14 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="form-group"><label for="e">Email</label>
+                    <div class="form-group"><label for="e">Email<span class="text-danger">*</span></label>
                     <input type="email" name="email" id="e" class="form-control"></div>
                     @error('email')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="form-group"><label for="p">Password</label>
+                    <div class="form-group"><label for="p">Password<span class="text-danger">*</span></label>
                     <input type="password" name="password" id="p" class="form-control"></div>
                     @error('password')
                         <span class="text-danger">{{ $message }}</span>

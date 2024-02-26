@@ -63,9 +63,11 @@ class SliderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Slider $slider)
+    public function show(Slider $slider, $id)
     {
-        //
+        $slider = Slider::find($id);
+
+        return view ('backend.pages.slider.show', compact('slider'));
     }
 
     /**

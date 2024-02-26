@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('article');
             $table->string('image_art');
             $table->date('tgl');
-            $table->string('text_prev');
+            $table->text('text_prev');
             $table->timestamps();
         });
     }

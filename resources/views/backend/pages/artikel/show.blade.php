@@ -25,11 +25,13 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Preview Text</th>
                             <th>Article</th>
                         </tr>
                     </thead>
                     <tbody>
             <tr>
+                <td>{{ $art->text_prev }}</td>
                 <td>{{ $art->article }}</td>
             </tr>
                     </tbody>

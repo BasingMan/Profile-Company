@@ -28,9 +28,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Title</th>
-                            <th>Subtitle</th>
                             <th>Image</th>
-                            <th>Link</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -39,12 +37,11 @@
             <tr>
                 <td>{{ $key+1 }}</td>
                 <td>{{ $item->title }}</td>
-                <td>{{ $item->subtitle }}</td>
                 <td>
                     <img src="{{ asset($item->gambar) }}" alt="Img" style="width:70px; height:70px;">
                 </td>
-                <td>{{ $item->link }}</td>
                 <td>
+                    <a href="{{ route('backend.slider.show', ['id' => $item->id]) }}" class="btn btn-inverse-warning">Show</a>
                     <a href="{{ route('backend.slider.edit', ['id' => $item->id]) }}" class="btn btn-inverse-warning">Edit</a>
                     <a href="{{ route('backend.slider.delete', ['id' => $item->id]) }}" class="btn btn-inverse-danger" id="delete">Delete</a>
                 </td>
