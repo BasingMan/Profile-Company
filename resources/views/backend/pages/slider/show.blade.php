@@ -19,30 +19,24 @@
 </style>
 <div class="card">
     <div class="card-body">
-        <h6 class="card-title">Testimoni Management</h6>
-        <p class="text-muted mb-3">Testimoni<code>.table</code></p>
+        <h6 class="card-title">Slider Management</h6>
+        <p class="text-muted mb-3">Slider<code>.table</code></p>
         <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Testimoni</th>
+                            <th>Subtitle</th>
+                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody>
             <tr>
-                <td>
-                    @if($testi->image_testi)
-                        <img src="{{ asset($testi->image_testi) }}" alt="Img" style="width:70px; height:70px;">
-                    @else
-                        No Image Available
-                    @endif
-                </td>
-                <td>{{ $testi->testimoni }}</td>
+                <td>{{ $slider->subtitle }}</td>
+                <td>{{ $slider->link }}</td>
             </tr>
                     </tbody>
                 </table>
-                <a href="{{ route('backend.testi.index') }}" class="button-like">Back</a>
+                <a href="{{ route('backend.slider.index') }}" class="button-like">Back</a>
         </div>
     </div>
   </div>

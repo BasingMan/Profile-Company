@@ -9,28 +9,28 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group"><label for="nama">Judul</label>
+                    <div class="form-group"><label for="nama">Judul<span class="text-danger">*</span></label>
                     <input type="text" name="judul" id="nama" class="form-control"></div>
                     @error('judul')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="form-group"><label for="e">Link</label>
+                    <div class="form-group"><label for="e">Link<span class="text-danger">*</span></label>
                     <input type="text" name="link" id="e" class="form-control"></div>
                     @error('link')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="form-group"><label for="p">Deskripsi</label>
+                    <div class="form-group"><label for="p">Deskripsi<span class="text-danger">*</span></label>
                     <input type="text" name="description" id="p" class="form-control"></div>
                     @error('description')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="form-group"><label for="i">Image</label>
+                    <div class="form-group"><label for="i">Image<span class="text-danger">*</span></label>
                     <input type="file" name="image" id="i" class="form-control"></div>
                     @error('image')
                         <span class="invalid-feedback">{{ $message }}</span>

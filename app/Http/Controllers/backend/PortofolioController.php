@@ -88,7 +88,7 @@ class PortofolioController extends Controller
             'judul' => 'required',
             'link' => 'required',
             'description' => 'required',
-            'image' => 'nullable|file|mimes:png,jpg,jpeg', 
+            'image' => 'required|file|mimes:png,jpg,jpeg', 
         ]);
     
         $porto = Portofolio::findOrFail($id);

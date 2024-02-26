@@ -43,7 +43,6 @@
                     <img src="{{ asset($item->image_art) }}" alt="Img" style="width:70px; height:70px;">
                 </td>
                 <td>{{ $item->tgl }}</td>
-                <td>{{ $item->text_prev }}</td>
                 <td>
                     <a href="{{ route('backend.art.show', ['id' => $item->id]) }}" class="btn btn-inverse-warning">Show</a>
                     <a href="{{ route('backend.art.edit', ['id' => $item->id]) }}" class="btn btn-inverse-warning">Edit</a>
