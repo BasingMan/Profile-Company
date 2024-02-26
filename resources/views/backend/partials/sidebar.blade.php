@@ -1,3 +1,9 @@
+<style>
+    .sidebar-item.active {
+    background-color: #1a237e;
+}
+</style>
+
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
@@ -10,7 +16,7 @@
                     Pages
                 </li>
 
-                <li class="sidebar-item active">
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="#">
                         <i class="align-middle" data-feather="sliders"></i> <span
                             class="align-middle">Dashboard</span>
@@ -104,3 +110,24 @@
             
         </div>
     </nav>
+
+<script>
+
+    var currentUrl = window.location.href;
+
+    var sidebarItems = document.querySelectorAll('.sidebar-item');
+
+
+    sidebarItems.forEach(function(item) {
+      
+        item.classList.remove('active');
+
+        var link = item.querySelector('.sidebar-link');
+
+        var linkHref = link.getAttribute('href');
+
+        if (currentUrl.includes(linkHref)) {
+            item.classList.add('active');
+        }
+    });
+</script>
