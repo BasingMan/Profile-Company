@@ -57,7 +57,7 @@
             <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1>HeroBiz<span>.</span></h1>
+                <h1>{{ $parameter['website_name'] }}<span>.</span></h1>
             </a>
 
             @include('frontend.partials.navbar')
@@ -82,11 +82,11 @@
 
         <!-- ======= Clients Section ======= -->
         @include('frontend.partials.section.Client')
-       <!-- End Clients Section -->
+        <!-- End Clients Section -->
 
         <!-- ======= Call To Action Section ======= -->
-        @include('frontend.partials.section.CallToAction')
-       <!-- End Call To Action Section -->
+        {{-- @include('frontend.partials.section.CallToAction') --}}
+        <!-- End Call To Action Section -->
 
         <!-- ======= On Focus Section ======= -->
         @include('frontend.partials.section.OnFocus')
@@ -94,7 +94,7 @@
 
         <!-- ======= Features Section ======= -->
         @include('frontend.partials.section.Features')
-       <!-- End Features Section -->
+        <!-- End Features Section -->
 
         <!-- ======= Services Section ======= -->
         @include('frontend.partials.section.Service')
@@ -106,7 +106,7 @@
 
         <!-- ======= F.A.Q Section ======= -->
         @include('frontend.partials.section.faq')
-      <!-- End F.A.Q Section -->
+        <!-- End F.A.Q Section -->
 
         <!-- ======= Portfolio Section ======= -->
         @include('frontend.partials.section.Portofolio')
@@ -123,7 +123,7 @@
         <!-- ======= Contact Section ======= -->
         @include('frontend.partials.section.Contact')
         <!-- End Contact Section -->
-                                                                                        
+
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -137,10 +137,10 @@
                         <div class="footer-info">
                             <h3>HeroBiz</h3>
                             <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                {{ $parameter['address'] }}
+                                <br>
+                                <strong>Phone:</strong> {{ $parameter['phone'] }}<br>
+                                <strong>Email:</strong> {{ $parameter['email'] }}<br>
                             </p>
                         </div>
                     </div>
@@ -186,7 +186,8 @@
 
                 <div class="d-flex flex-column align-items-center align-items-lg-start">
                     <div class="copyright">
-                        &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
+                        &copy; Copyright <strong><span>{{ $parameter['website_name'] }}</span></strong>. All Rights
+                        Reserved
                     </div>
                     <div class="credits">
                         <!-- All the links in the footer should remain intact. -->
