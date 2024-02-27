@@ -41,7 +41,7 @@
                 <td>{{ $item->judul }}</td>
                 <td>{{ $item->link }}</td>
                 <td>
-                    <img src="{{ asset($item->image) }}" alt="Img" style="width:70px; height:70px;">
+                    <img src="{{ asset('uploads/porto/' . $item->image) }}" alt="Img" style="width:70px; height:70px;">
                 </td>
                 <td>{{ $item->description }}</td>
                 <td>

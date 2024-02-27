@@ -40,7 +40,7 @@
                 <td>{{ $key+1 }}</td>
                 <td>{{ $item->header }}</td>
                 <td>
-                    <img src="{{ asset($item->image_art) }}" alt="Img" style="width:70px; height:70px;">
+                    <img src="{{ asset('uploads/art/' . $item->image_art) }}" alt="Img" style="width:70px; height:70px;">
                 </td>
                 <td>{{ $item->tgl }}</td>
                 <td>
