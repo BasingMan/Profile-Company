@@ -7,7 +7,7 @@
                 @foreach ($testimonies as $testimoni)
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                            <img src="{{ asset($testimoni->image_path ?? 'No Image') }}" class="testimonial-img" alt="">
                             <h3>{{ $testimoni->name }}</h3>
                             <h4>{{ $testimoni->company }}</h4>
                             <div class="stars">

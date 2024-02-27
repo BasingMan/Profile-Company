@@ -33,7 +33,7 @@
             <tr>
                 <td>
                     @if($testi->image_testi)
-                        <img src="{{ asset($testi->image_testi) }}" alt="Img" style="width:70px; height:70px;">
+                        <img src="{{ asset('uploads/testi/' . $testi->image_testi) }}" alt="Img" style="width:70px; height:70px;">
                     @else
                         No Image Available
                     @endif
