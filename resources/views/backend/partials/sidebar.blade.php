@@ -1,7 +1,7 @@
 <style>
     .sidebar-item.active {
-    background-color: #1a237e;
-}
+        background-color: #1a237e;
+    }
 </style>
 
 <div class="wrapper">
@@ -18,8 +18,7 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="#">
-                        <i class="align-middle" data-feather="sliders"></i> <span
-                            class="align-middle">Dashboard</span>
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                     </a>
                 </li>
 
@@ -52,82 +51,34 @@
                         <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Article</span>
                     </a>
                 </li>
-
-                <li class="sidebar-header">
-                    Tools & Components
-                </li>
-
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-buttons.html">
-                        <i class="align-middle" data-feather="square"></i> <span class="align-middle">Buttons</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-forms.html">
-                        <i class="align-middle" data-feather="check-square"></i> <span
-                            class="align-middle">Forms</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-cards.html">
-                        <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Cards</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-typography.html">
-                        <i class="align-middle" data-feather="align-left"></i> <span
-                            class="align-middle">Typography</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="icons-feather.html">
-                        <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-header">
-                    Plugins & Addons
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="charts-chartjs.html">
-                        <i class="align-middle" data-feather="bar-chart-2"></i> <span
-                            class="align-middle">Charts</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="maps-google.html">
-                        <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                    <a class="sidebar-link" href="/admin/pengaturan">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Pengaturan
+                            Web</span>
                     </a>
                 </li>
             </ul>
 
-            
+
         </div>
     </nav>
 
-<script>
+    <script>
+        var currentUrl = window.location.href;
 
-    var currentUrl = window.location.href;
-
-    var sidebarItems = document.querySelectorAll('.sidebar-item');
+        var sidebarItems = document.querySelectorAll('.sidebar-item');
 
 
-    sidebarItems.forEach(function(item) {
-      
-        item.classList.remove('active');
+        sidebarItems.forEach(function(item) {
 
-        var link = item.querySelector('.sidebar-link');
+            item.classList.remove('active');
 
-        var linkHref = link.getAttribute('href');
+            var link = item.querySelector('.sidebar-link');
 
-        if (currentUrl.includes(linkHref)) {
-            item.classList.add('active');
-        }
-    });
-</script>
+            var linkHref = link.getAttribute('href');
+
+            if (currentUrl.includes(linkHref)) {
+                item.classList.add('active');
+            }
+        });
+    </script>

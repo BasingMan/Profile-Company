@@ -3,11 +3,10 @@
 
         <div class="section-header">
             <h2>About Us</h2>
-            <p>Architecto nobis eos vel nam quidem vitae temporibus voluptates qui hic deserunt iusto omnis nam
-                voluptas asperiores sequi tenetur dolores incidunt enim voluptatem magnam cumque fuga.</p>
+            <p>{!! $parameter['about_us'] !!}</p>
         </div>
 
-        <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
+        {{-- <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
 
             <div class="col-lg-5">
                 <div class="about-img">
@@ -126,7 +125,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
 
     </div>
 </section><!-- End About Section -->
