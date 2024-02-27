@@ -38,7 +38,7 @@
                 <td>{{ $key+1 }}</td>
                 <td>{{ $item->title }}</td>
                 <td>
-                    <img src="{{ asset($item->gambar) }}" alt="Img" style="width:70px; height:70px;">
+                    <img src="{{ asset('uploads/slider/' . $item->gambar) }}" alt="Img" style="width:70px; height:70px;">
                 </td>
                 <td>
                     <a href="{{ route('backend.slider.show', ['id' => $item->id]) }}" class="btn btn-inverse-warning">Show</a>
