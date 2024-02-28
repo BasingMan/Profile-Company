@@ -35,7 +35,7 @@ class SliderController extends Controller
             $request->validate([
                 'title' => 'required',
                 'link' => 'required',
-                'gambar' => 'required|file|mimes:png, jpg, jpeg',
+                'gambar' => 'required|file|mimes:png,jpg,jpeg',
                 'subtitle' => 'required',
             ]);
             
@@ -100,7 +100,7 @@ class SliderController extends Controller
             $request->validate([
                 'title' => 'required',
                 'link' => 'required',
-                'gambar' => 'required|file|mimes:png, jpg, jpeg',
+                'gambar' => 'required|file|mimes:png,jpg,jpeg',
                 'subtitle' => 'required',
             ]);
             
