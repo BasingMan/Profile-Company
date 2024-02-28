@@ -31,35 +31,44 @@ class TestimoniController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'company' => 'required',
-            'rating' => 'required',
-            'image_testi' => 'nullable|mimes:png,jpg,jpeg',
-            'testimoni' => 'required',
-        ], [
-            'image_testi.mimes' => 'The file must be png/jpg/jpeg',
-        ]);
-        
-        $testi = new Testimoni;
-        
-        $testi->name = $request->input('name');
-        $testi->company = $request->input('company');
-        $testi->rating = $request->input('rating');
-        $testi->testimoni = $request->input('testimoni');
-        
-        if ($request->hasFile('image_testi')) {
-            $file = $request->file('image_testi');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads/testi/', $filename);
-            $testi->image_testi = $filename;
+        try{
+            $request->validate([
+                'name' => 'required',
+                'company' => 'required',
+                'rating' => 'required',
+                'image_testi' => 'nullable|mimes:png,jpg,jpeg',
+                'testimoni' => 'required',
+            ], [
+                'image_testi.mimes' => 'The file must be png/jpg/jpeg',
+            ]);
+            
+            $testi = new Testimoni;
+            
+            $testi->name = $request->input('name');
+            $testi->company = $request->input('company');
+            $testi->rating = $request->input('rating');
+            $testi->testimoni = $request->input('testimoni');
+            
+            if ($request->hasFile('image_testi')) {
+                $file = $request->file('image_testi');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $file->move('uploads/testi/', $filename);
+                $testi->image_testi = $filename;
+            }
+            
+            $testi->save();
+            
+            return redirect()->route('backend.testi.index')->with([
+                'alert'=>'success',
+                'message'=>'New Testimoni has been added.',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
         }
-        
-        $testi->save();
-        
-        return redirect()->route('backend.testi.index')->with('status', 'Testimoni Updated');
-        
     }
 
     /**
@@ -87,44 +96,54 @@ class TestimoniController extends Controller
      */
     public function update(Request $request, Testimoni $testi, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'company' => 'required',
-            'rating' => 'required',
-            'image_testi' => 'nullable|mimes:png,jpg,jpeg',
-            'testimoni' => 'required', 
-        ],[
-            'image_testi.image' => 'it needs to be an image file',
-            'image_testi.mimes' => 'the file must be png/jpg/jpeg',
-        ]);
-    
-        $testi = Testimoni::findOrFail($id);
-    
+        try{
+            $request->validate([
+                'name' => 'required',
+                'company' => 'required',
+                'rating' => 'required',
+                'image_testi' => 'nullable|mimes:png,jpg,jpeg',
+                'testimoni' => 'required', 
+            ],[
+                'image_testi.image' => 'it needs to be an image file',
+                'image_testi.mimes' => 'the file must be png/jpg/jpeg',
+            ]);
+        
+            $testi = Testimoni::findOrFail($id);
+        
 
-        if ($request->hasFile('image_testi')) {
-            $oldImage_testi = $testi->image_testi;
-            if ($oldImage_testi) {
+            if ($request->hasFile('image_testi')) {
+                $oldImage_testi = $testi->image_testi;
+                if ($oldImage_testi) {
 
-                File::delete('uploads/testi' . $oldImage_testi);
+                    File::delete('uploads/testi' . $oldImage_testi);
+                }
+        
+                $file = $request->file('image_testi');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('uploads/testi', $filename);
+                $testi->image_testi = $filename;
             }
-    
-            $file = $request->file('image_testi');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/testi', $filename);
-            $testi->image_testi = $filename;
+        
+
+            $testi->name = $request->input('name');
+            $testi->company = $request->input('company');
+            $testi->rating = $request->input('rating');
+            $testi->testimoni = $request->input('testimoni');
+        
+
+            $testi->save();
+        
+            return redirect()->route('backend.testi.index')->with([
+                'alert'=>'success',
+                'message'=>'Testimoni updated',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
         }
-    
-
-        $testi->name = $request->input('name');
-        $testi->company = $request->input('company');
-        $testi->rating = $request->input('rating');
-        $testi->testimoni = $request->input('testimoni');
-    
-
-        $testi->save();
-    
-        return redirect()->route('backend.testi.index')->with('status', 'Testimoni has been Updated');
     }
 
     /**
@@ -132,8 +151,18 @@ class TestimoniController extends Controller
      */
     public function destroy(Testimoni $testimoni, $id)
     {
-        Testimoni::find($id)->delete();
+        try{
+            Testimoni::find($id)->delete();
 
-        return redirect()->route('backend.testi.index')->with('status', 'Testimoni Deleted');
+            return redirect()->route('backend.testi.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfully deleted',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }

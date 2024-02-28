@@ -32,33 +32,43 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required',
-            'link' => 'required',
-            'image' => 'required|file|mimes:png, jpg, jpeg',
-            'description' => 'required',
-        ]);
-        
-        $porto = new Portofolio;
+        try{
+            $request->validate([
+                'judul' => 'required',
+                'link' => 'required',
+                'image' => 'required|file|mimes:png, jpg, jpeg',
+                'description' => 'required',
+            ]);
+            
+            $porto = new Portofolio;
 
-        $porto->judul = $request->input('judul');
-        $porto->link = $request->input('link');
-        $porto->description = $request->input('description');
+            $porto->judul = $request->input('judul');
+            $porto->link = $request->input('link');
+            $porto->description = $request->input('description');
 
-        if($request->hasFile('image'))
-        {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads/porto/', $filename);
-            $porto->image = $filename;
-        }else{
-            return redirect()->back()->with('error', 'Error uploading image.');
+            if($request->hasFile('image'))
+            {
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $file->move('uploads/porto/', $filename);
+                $porto->image = $filename;
+            }else{
+                throw new \Exception('Error adding an image');
+            }
+
+            $porto->save();
+
+            return redirect()->route('backend.porto.index')->with([
+                'alert'=>'success',
+                'message'=>'Portofolio added.'
+            ]);
+        } catch (\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
         }
-
-        $porto->save();
-
-        return redirect()->route('backend.porto.index')->with('status','Portofolio Updated');
     }
 
     /**
@@ -84,39 +94,51 @@ class PortofolioController extends Controller
      */
     public function update(Request $request, Portofolio $porto, $id)
     {   
-        $request->validate([
-            'judul' => 'required',
-            'link' => 'required',
-            'description' => 'required',
-            'image' => 'required|file|mimes:png,jpg,jpeg', 
-        ]);
-    
-        $porto = Portofolio::findOrFail($id);
-    
+        try{
+            $request->validate([
+                'judul' => 'required',
+                'link' => 'required',
+                'description' => 'required',
+                'image' => 'required|file|mimes:png,jpg,jpeg', 
+            ]);
+        
+            $porto = Portofolio::findOrFail($id);
+        
 
-        if ($request->hasFile('image')) {
-            $oldImage = $porto->image;
-            if ($oldImage) {
+            if ($request->hasFile('image')) {
+                $oldImage = $porto->image;
+                if ($oldImage) {
 
-                File::delete('uploads/porto' . $oldImage);
+                    File::delete('uploads/porto' . $oldImage);
+                }
+        
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('uploads/porto', $filename);
+                $porto->image = $filename;
+            } else {
+                throw new \Exception('Error updating an image');
             }
-    
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/porto', $filename);
-            $porto->image = $filename;
+        
+
+            $porto->judul = $request->input('judul');
+            $porto->link = $request->input('link');
+            $porto->description = $request->input('description');
+        
+
+            $porto->save();
+        
+            return redirect()->route('backend.porto.index')->with([
+                'alert'=>'success',
+                'message'=>'Success updating portfolio.',
+            ]);
+        } catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
         }
-    
-
-        $porto->judul = $request->input('judul');
-        $porto->link = $request->input('link');
-        $porto->description = $request->input('description');
-    
-
-        $porto->save();
-    
-        return redirect()->route('backend.porto.index')->with('status', 'Portofolio Updated');
     }
 
     /**
@@ -124,8 +146,18 @@ class PortofolioController extends Controller
      */
     public function destroy($id)
     {
-        Portofolio::find($id)->delete();
+        try{
+            Portofolio::find($id)->delete();
 
-        return redirect()->route('backend.porto.index')->with('status', 'Portofolio Deleted');
+            return redirect()->route('backend.porto.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfully deleted'
+            ]);
+        } catch (\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=> $e->getMessage(),
+            ]);
+        }
     }
 }

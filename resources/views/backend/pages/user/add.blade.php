@@ -1,5 +1,6 @@
 @extends('backend.layouts.admin_layout')
 @section('main')
+    @include('backend.partials.message')
   <div class="card">
     <div class="card-header">
         <div class="h3">Add User</div>
