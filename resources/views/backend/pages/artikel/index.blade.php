@@ -1,5 +1,6 @@
 @extends('backend.layouts.admin_layout')
 @section('main')
+    @include('backend.partials.message')
 <style>
    
     .button-like {
@@ -30,7 +31,6 @@
                             <th>Header</th>
                             <th>Image</th>
                             <th>Date</th>
-                            <th>Preview Text</th>
                             <th>Action</th>
                         </tr>
                     </thead>

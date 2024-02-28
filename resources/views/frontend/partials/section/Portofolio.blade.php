@@ -31,8 +31,8 @@
                             <img src="{{ asset('uploads/porto/' . $portofolio->image) }}" class="img-fluid" alt="">
                         </div>
                         <div class="portfolio-info">
-                            <h4>{{ $portofolio->judul }}</h4>
-                            <a href="{{ asset('uploads/porto/' . $portofolio->image) }}" title="{{ $portofolio->judul }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                            <h4>{{ $portofolio->judul ?? '-'}}</h4>
+                            <a href="{{ asset('uploads/porto/' . $portofolio->image) }}" title="{{ $portofolio->judul ?? '-'}}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                         </div>
                     </div><!-- End Portfolio Item -->
                 @endforeach

@@ -31,43 +31,53 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'header' => 'required',
-            'article' => 'required',
-            'image_art' => 'required|image|mimes:png,jpg,jpeg',
-            'tgl' => 'required|date',
-        ], [
-            'image_art.image' => 'File must be an image',
-            'image_art.mimes' => 'File must be PNG, JPG, or JPEG',
-            'tgl.required' => 'Date is required',
-        ]);
-        
-        $art = new Artikel;
-        
-        $art->header = $request->input('header');
-        $art->article = $request->input('article');
-        $firstParagraph = '';
-            if(preg_match('/<p>(.*?)<\/p>/', $request->input('article'), $matches)) {
-                $firstParagraph = strip_tags($matches[1]);
-}
-        $art->text_prev = $firstParagraph;
-        $art->tgl = $request->input('tgl');
-        
-        if ($request->hasFile('image_art')) {
-            $file = $request->file('image_art');
-            if ($file->isValid()) {
-                $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move('uploads/art/', $filename);
-                $art->image_art = $filename;
-            } else {
-                return redirect()->back()->with('error', 'Error uploading image.');
+        try {
+            $request->validate([
+                'header' => 'required',
+                'article' => 'required',
+                'image_art' => 'required|image|mimes:png,jpg,jpeg',
+                'tgl' => 'required|date',
+            ], [
+                'image_art.image' => 'File must be an image',
+                'image_art.mimes' => 'File must be PNG, JPG, or JPEG',
+                'tgl.required' => 'Date is required',
+            ]);
+            
+            $art = new Artikel;
+            
+            $art->header = $request->input('header');
+            $art->article = $request->input('article');
+            $firstParagraph = '';
+                if(preg_match('/<p>(.*?)<\/p>/', $request->input('article'), $matches)) {
+                    $firstParagraph = strip_tags($matches[1]);
+                }
+            $art->text_prev = $firstParagraph;
+            $art->tgl = $request->input('tgl');
+            
+            if ($request->hasFile('image_art')) {
+                $file = $request->file('image_art');
+                if ($file->isValid()) {
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = time().'.'.$extension;
+                    $file->move('uploads/art/', $filename);
+                    $art->image_art = $filename;
+                } else {
+                    throw new \Exception('Error Uploading Image.');
+                }
             }
+            
+            $art->save();
+            
+            return redirect()->route('backend.art.index')->with([
+                'alert'     => 'success',
+                'message'   => 'Article berhasil diubah'
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'alert'     => 'success',
+                'message'   => $e->getMessage(),
+            ]);
         }
-        
-        $art->save();
-        
-        return redirect()->route('backend.art.index')->with('status', 'Article Updated');
         
     }
 
@@ -96,43 +106,53 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, Artikel $artikel, $id)
     {
-        $request->validate([
-            'header' => 'required',
-            'article' => 'required',
-            'image_art' => 'required|image|mimes:png,jpg,jpeg',
-            'tgl' => 'required|date',
-        ], [
-            'image_art.image' => 'File must be an image',
-            'image_art.mimes' => 'File must be PNG, JPG, or JPEG',
-            'tgl.required' => 'Date is required',
-        ]);
-        
-        $art = Artikel::findOrFail($id);
-        
-        $art->header = $request->input('header');
-        $art->article = $request->input('article');
-        $firstParagraph = '';
-            if(preg_match('/<p>(.*?)<\/p>/', $request->input('article'), $matches)) {
-                $firstParagraph = strip_tags($matches[1]);
-}
-        $art->text_prev = $firstParagraph;
-        $art->tgl = $request->input('tgl');
-        
-        if ($request->hasFile('image_art')) {
-            $file = $request->file('image_art');
-            if ($file->isValid()) {
-                $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move('uploads/art/', $filename);
-                $art->image_art = $filename;
-            } else {
-                return redirect()->back()->with('error', 'Error uploading image.');
+        try{
+            $request->validate([
+                'header' => 'required',
+                'article' => 'required',
+                'image_art' => 'required|image|mimes:png,jpg,jpeg',
+                'tgl' => 'required|date',
+            ], [
+                'image_art.image' => 'File must be an image',
+                'image_art.mimes' => 'File must be PNG, JPG, or JPEG',
+                'tgl.required' => 'Date is required',
+            ]);
+            
+            $art = Artikel::findOrFail($id);
+            
+            $art->header = $request->input('header');
+            $art->article = $request->input('article');
+            $firstParagraph = '';
+                if(preg_match('/<p>(.*?)<\/p>/', $request->input('article'), $matches)) {
+                    $firstParagraph = strip_tags($matches[1]);
+                }
+            $art->text_prev = $firstParagraph;
+            $art->tgl = $request->input('tgl');
+            
+            if ($request->hasFile('image_art')) {
+                $file = $request->file('image_art');
+                if ($file->isValid()) {
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = time().'.'.$extension;
+                    $file->move('uploads/art/', $filename);
+                    $art->image_art = $filename;
+                } else {
+                    throw new \Exception('Error Updating Image.');
+                }
             }
+            
+            $art->save();
+            
+            return redirect()->route('backend.art.index')->with([
+                'alert' => 'success',
+                'message' => 'Success Updating Article',
+            ]);
+        } catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert' => 'error',
+                'message' => $e->getMessage(),
+            ]);
         }
-        
-        $art->save();
-        
-        return redirect()->route('backend.art.index')->with('status', 'Article Updated');
     }
 
     /**
@@ -140,8 +160,18 @@ class ArtikelController extends Controller
      */
     public function destroy($id)
     {
-        Artikel::find($id)->delete();
+        try{
+            Artikel::find($id)->delete();
 
-        return redirect()->route('backend.art.index')->with('status', 'Article Deleted');
+            return redirect()->route('backend.art.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfully deleted',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }

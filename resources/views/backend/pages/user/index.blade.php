@@ -1,5 +1,6 @@
 @extends('backend.layouts.admin_layout')
 @section('main')
+    @include('backend.partials.message')
 <style>
 .button-like {
     display: inline-block;

@@ -1,6 +1,6 @@
 @extends('backend.layouts.admin_layout')
 @section('main')
-
+    @include('backend.partials.message')
 {{-- CKEDITOR --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js">
 </script>

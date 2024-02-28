@@ -1,6 +1,7 @@
 @extends('backend.layouts.admin_layout')
 @section('main')
-
+    @include('backend.partials.message')
+    
 <style>
     .rate {
         float: left;

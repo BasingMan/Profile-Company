@@ -37,27 +37,37 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'role_id' => 'required',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string',
+        try{
+            $validatedData = $request->validate([
+                'role_id' => 'required',
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string',
+                
+            ],[
+                'role_id.required' => 'must select role',
+            ]);
+
+            $user = new User();
+
+            $user->role_id = $validatedData['role_id'];
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
+            $user->password = bcrypt( $validatedData['password']);
             
-        ],[
-            'role_id.required' => 'must select role',
-        ]);
 
-        $user = new User();
+            $user->save();
 
-        $user->role_id = $validatedData['role_id'];
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->password = bcrypt( $validatedData['password']);
-        
-
-        $user->save();
-
-        return redirect()->route('backend.user.index')->with('status', 'User added');
+            return redirect()->route('backend.user.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfully deleted',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -79,7 +89,10 @@ class UserController extends Controller
     
             return view('backend.pages.user.edit', compact('roles', 'user')); 
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('backend.user.index')->with('error', 'User not found');
+            return redirect()->route('backend.user.index')->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);;
         } 
     }
 
@@ -88,21 +101,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'role_id' => 'required',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,',
-        ]);
+        try{
+            $validatedData = $request->validate([
+                'role_id' => 'required',
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email,',
+            ]);
+            
+            $user = User::findOrFail($id);
         
-        $user = User::findOrFail($id);
-    
-        $user->role_id = $validatedData['role_id'];
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-    
-        $user->save();
-    
-        return redirect()->route('backend.user.index')->with('status', 'User is Updated');
+            $user->role_id = $validatedData['role_id'];
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
+        
+            $user->save();
+        
+            return redirect()->route('backend.user.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfully deleted',
+            ]);;
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -110,8 +133,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        try{
+            User::findOrFail($id)->delete();
 
-        return redirect()->route('backend.user.index');
+            return redirect()->route('backend.user.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfully deleted',
+            ]);;
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }

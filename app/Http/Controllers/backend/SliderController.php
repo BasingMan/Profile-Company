@@ -31,33 +31,44 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'link' => 'required',
-            'gambar' => 'required|file|mimes:png, jpg, jpeg',
-            'subtitle' => 'required',
-        ]);
-        
-        $slider = new Slider;
+        try{
+            $request->validate([
+                'title' => 'required',
+                'link' => 'required',
+                'gambar' => 'required|file|mimes:png, jpg, jpeg',
+                'subtitle' => 'required',
+            ]);
+            
+            $slider = new Slider;
 
-        $slider->title = $request->input('title');
-        $slider->link = $request->input('link');
-        $slider->subtitle = $request->input('subtitle');
+            $slider->title = $request->input('title');
+            $slider->link = $request->input('link');
+            $slider->subtitle = $request->input('subtitle');
 
-        if($request->hasFile('gambar'))
-        {
-            $file = $request->file('gambar');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads/slider/', $filename);
-            $slider->gambar = $filename;
-        }else{
-            return redirect()->back()->with('error', 'Error uploading Image.');
+            if($request->hasFile('gambar'))
+            {
+                $file = $request->file('gambar');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $file->move('uploads/slider/', $filename);
+                $slider->gambar = $filename;
+            }else{
+                throw new \Exception('Error adding image.');
+            }
+
+            $slider->save();
+
+            return redirect()->route('backend.slider.index')->with([
+                'alert'=>'success',
+                'message'=>'Slidder has been added',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+
         }
-
-        $slider->save();
-
-        return redirect()->route('backend.slider.index')->with('status','Slider Updated');
     }
 
     /**
@@ -85,33 +96,43 @@ class SliderController extends Controller
      */
     public function update(Request $request, Slider $slider, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'link' => 'required',
-            'gambar' => 'required|file|mimes:png, jpg, jpeg',
-            'subtitle' => 'required',
-        ]);
-        
-        $slider = Slider::findOrFail($id);
+        try{
+            $request->validate([
+                'title' => 'required',
+                'link' => 'required',
+                'gambar' => 'required|file|mimes:png, jpg, jpeg',
+                'subtitle' => 'required',
+            ]);
+            
+            $slider = Slider::findOrFail($id);
 
-        if($request->hasFile('gambar'))
-        {
-            $file = $request->file('gambar');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads/slider/', $filename);
-            $slider->gambar = $filename;
-        }else{
-            return redirect()->back()->with('error', 'Error uploading Image.');
+            if($request->hasFile('gambar'))
+            {
+                $file = $request->file('gambar');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $file->move('uploads/slider/', $filename);
+                $slider->gambar = $filename;
+            }else{
+                throw new \Exception('Erro updating the image');
+            }
+
+            $slider->title = $request->input('title');
+            $slider->link = $request->input('link');
+            $slider->subtitle = $request->input('subtitle');
+
+            $slider->save();
+
+            return redirect()->route('backend.slider.index')->with([
+                'alert'=>'success',
+                'message'=>'Slider is Updated'
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
         }
-
-        $slider->title = $request->input('title');
-        $slider->link = $request->input('link');
-        $slider->subtitle = $request->input('subtitle');
-
-        $slider->save();
-
-        return redirect()->route('backend.slider.index')->with('status','Slider Updated');
     }
 
     /**
@@ -119,8 +140,18 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        Slider::find($id)->delete();
+        try{
+            Slider::find($id)->delete();
 
-        return redirect()->route('backend.slider.index')->with('status', 'Slider Deleted');
+            return redirect()->route('backend.slider.index')->with([
+                'alert'=>'success',
+                'message'=>'Successfullt deleted',
+            ]);
+        }catch(\Exception $e){
+            return redirect()->back()->with([
+                'alert'=>'success',
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }
