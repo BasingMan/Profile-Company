@@ -18,3 +18,8 @@ Route::get('/', function () {
         'parameter' => $parameters,
     ]);
 })->name('index');
+
+Route::get('/blog', function (){
+    return view('frontend.pages.blog.index');
+})->name('blog');
+

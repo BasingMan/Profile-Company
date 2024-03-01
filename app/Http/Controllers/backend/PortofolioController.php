@@ -36,7 +36,7 @@ class PortofolioController extends Controller
             $request->validate([
                 'judul' => 'required',
                 'link' => 'required',
-                'image' => 'required|file|mimes:png, jpg, jpeg',
+                'image' => 'required|file|mimes:png,jpg,jpeg',
                 'description' => 'required',
             ]);
             
@@ -99,7 +99,7 @@ class PortofolioController extends Controller
                 'judul' => 'required',
                 'link' => 'required',
                 'description' => 'required',
-                'image' => 'required|file|mimes:png,jpg,jpeg', 
+                'image' => 'required|file|mimes:png,jpg,jpeg',
             ]);
         
             $porto = Portofolio::findOrFail($id);
