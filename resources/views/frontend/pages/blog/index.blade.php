@@ -66,14 +66,14 @@
                 </div>
 
                 <h2 class="title">
-                  <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
+                  <a href="{{ route('frontend.blog.details') }}">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
                 </h2>
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('frontend.blog.details') }}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('frontend.blog.details') }}"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('frontend.blog.details') }}">12 Comments</a></li>
                   </ul>
                 </div>
 
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">Read More</a>
+                  <a href="{{ route('frontend.blog.details') }}">Read More</a>
                 </div>
 
               </article>
@@ -98,14 +98,14 @@
                 </div>
 
                 <h2 class="title">
-                  <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                  <a href="{{ route('frontend.blog.details') }}">Nisi magni odit consequatur autem nulla dolorem</a>
                 </h2>
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('frontend.blog.details') }}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('frontend.blog.details') }}"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('frontend.blog.details') }}">12 Comments</a></li>
                   </ul>
                 </div>
 
@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">Read More</a>
+                  <a href="{{ route('frontend.blog.details') }}">Read More</a>
                 </div>
 
               </article>
@@ -130,14 +130,14 @@
                 </div>
 
                 <h2 class="title">
-                  <a href="blog-details.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
+                  <a href="{{ route('frontend.blog.details') }}">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
                 </h2>
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('frontend.blog.details') }}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('frontend.blog.details') }}"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('frontend.blog.details') }}">12 Comments</a></li>
                   </ul>
                 </div>
 
@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">Read More</a>
+                  <a href="{{ route('frontend.blog.details') }}">Read More</a>
                 </div>
 
               </article>
@@ -162,14 +162,14 @@
                 </div>
 
                 <h2 class="title">
-                  <a href="blog-details.html">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
+                  <a href="{{ route('frontend.blog.details') }}">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
                 </h2>
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('frontend.blog.details') }}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('frontend.blog.details') }}"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('frontend.blog.details') }}">12 Comments</a></li>
                   </ul>
                 </div>
 
@@ -180,7 +180,7 @@
                 </div>
 
                 <div class="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">Read More</a>
+                  <a href="{{ route('frontend.blog.details') }}">Read More</a>
                 </div>
 
               </article>
@@ -194,14 +194,14 @@
                 </div>
 
                 <h2 class="title">
-                  <a href="blog-details.html">Accusamus quaerat aliquam qui debitis facilis consequatur</a>
+                  <a href="{{ route('frontend.blog.details') }}">Accusamus quaerat aliquam qui debitis facilis consequatur</a>
                 </h2>
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('frontend.blog.details') }}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('frontend.blog.details') }}"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('frontend.blog.details') }}">12 Comments</a></li>
                   </ul>
                 </div>
 
@@ -212,7 +212,7 @@
                 </div>
 
                 <div class="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">Read More</a>
+                  <a href="{{ route('frontend.blog.details') }}">Read More</a>
                 </div>
 
               </article>
@@ -226,14 +226,14 @@
                 </div>
 
                 <h2 class="title">
-                  <a href="blog-details.html">Distinctio provident quibusdam numquam aperiam aut</a>
+                  <a href="{{ route('frontend.blog.details') }}">Distinctio provident quibusdam numquam aperiam aut</a>
                 </h2>
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('frontend.blog.details') }}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('frontend.blog.details') }}"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('frontend.blog.details') }}">12 Comments</a></li>
                   </ul>
                 </div>
 
@@ -244,7 +244,7 @@
                 </div>
 
                 <div class="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">Read More</a>
+                  <a href="{{ route('frontend.blog.details') }}">Read More</a>
                 </div>
 
               </article>

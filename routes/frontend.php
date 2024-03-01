@@ -23,3 +23,6 @@ Route::get('/blog', function (){
     return view('frontend.pages.blog.index');
 })->name('blog');
 
+Route::get('/blog/details', function (){
+    return view('frontend.partials.section.Blog-details');
+})->name('blog.details');
