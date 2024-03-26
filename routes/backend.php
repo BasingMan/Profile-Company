@@ -1,25 +1,27 @@
 <?php
 
 use App\Http\Controllers\backend\ArtikelController;
+use App\Http\Controllers\LogoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\PortofolioController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\TestimoniController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\ParameterController;
+use Illuminate\Support\Facades\Auth;
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return view('backend.layouts.admin_layout');
-    })->name('dashboard');
-
+    Route::redirect('/', '/admin/login');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    
     // LOGIN
     Route::group(['middleware' => 'guest'], function () {
         Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
         Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     });
-
+    
     // LOGOUT
     Route::group(['middleware' => 'auth'], function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -28,9 +30,7 @@ Route::prefix('admin')->group(function () {
     // ADMIN ROUTES
     Route::group(['middleware' => 'auth.admin'], function () {
 
-        Route::get('/', function () {
-            return view('backend.layouts.admin_layout');
-        })->name('dashboard');
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
         // Group routes for Portofolio module
         Route::prefix('portofolio')->group(function () {
@@ -54,7 +54,7 @@ Route::prefix('admin')->group(function () {
         });
 
         // Group routes for Slider module
-        Route::prefix('slider')->group(function () {
+        Route::prefix('banner')->group(function () {
             Route::get('/', [SliderController::class, 'index'])->name('slider.index');
             Route::get('/add', [SliderController::class, 'create'])->name('slider.add');
             Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
@@ -85,9 +85,35 @@ Route::prefix('admin')->group(function () {
             Route::get('/show/{id}', [ArtikelController::class, 'show'])->name('art.show');
         });
 
+        //Group routes for Pengaturan module
         Route::prefix('pengaturan')->group(function () {
             Route::get('/', [ParameterController::class, 'index'])->name('pengaturan.index');
             Route::Put('/', [ParameterController::class, 'update'])->name('pengaturan.update');
         });
+
+        Route::prefix('logo')->group(function() {
+            Route::get('/', [LogoController::class, 'index'])->name('logo.index');
+            Route::post('/', [LogoController::class, 'update'])->name('logo.update');
+        });
+
+        //Group routes for service module
+        Route::prefix('service')->group(function (){
+            Route::get('/', [ServiceController::class, 'index'])->name('ser.index');
+            Route::get('/add', [ServiceController::class, 'create'])->name('ser.add');
+            Route::post('/store', [ServiceController::class, 'store'])->name('ser.store');
+            Route::get('/edit/{id}', [ServiceController::class, 'edit'])->name('ser.edit');
+            Route::post('/update/{id}', [ServiceController::class, 'update'])->name('ser.update');
+            Route::get('/delete/{id}', [ServiceController::class, 'destroy'])->name('ser.delete');
+        });
     });
 });
+
+
+
+Route::get('/admin/login', function () {
+    if (Auth::check()) {
+        return redirect()->route('backend.dashboard');
+    } else {
+        return view('backend.pages.login.login');
+    }
+})->name('admin.login');

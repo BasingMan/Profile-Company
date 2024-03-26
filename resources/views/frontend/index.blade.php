@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>HeroBiz Bootstrap Template - Home 1</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>{{ $parameter['website_name'] }}</title>
+    <meta content="description" name="{{ $parameter['website_name'] }} adalah perusahaan startup, melayani apa yang dibutuhkan oleh client kita">
+    <meta content="keywords" name="Triwikrama, Startup, Layanan TI, Lowongan Kerja, Layanan Client">
 
     <!-- Favicons -->
     <link href="{{ asset('frontend/assets/img/favicon.png') }}" rel="icon">
@@ -46,6 +46,28 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    .logo {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    }
+
+    .logo-img {
+        width: 50px;
+        height: 100px; 
+        border-radius: 50%; 
+        margin-right: 10px; 
+    }
+
+    .logo-text {
+        font-size: 24px; 
+        font-weight: bold;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -54,10 +76,13 @@
     <header id="header" class="header fixed-top" data-scrollto-offset="0">
         <div class="container-fluid d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1>{{ $parameter['website_name'] }}<span>.</span></h1>
+            {{-- @dd($logos->logo_image) --}}
+            <a href="#" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+                @if ($logos)
+                    <img src="{{ asset('uploads/logo/' . $logos->logo_image) }}" alt="Logo" class="logo-img">
+                @else
+                    <h1 class="logo-text">{{ $parameter['website_name'] }}<span>.</span></h1>
+                @endif
             </a>
 
             @include('frontend.partials.navbar')
@@ -73,7 +98,7 @@
     <main id="main">
 
         <!-- ======= Featured Services Section ======= -->
-        @include('frontend.partials.section.FeaturedService')
+        {{-- @include('frontend.partials.section.FeaturedService') --}}
         <!-- End Featured Services Section -->
 
         <!-- ======= About Section ======= -->
@@ -81,7 +106,7 @@
         <!-- End About Section -->
 
         <!-- ======= Clients Section ======= -->
-        @include('frontend.partials.section.Client')
+        {{-- @include('frontend.partials.section.Client') --}}
         <!-- End Clients Section -->
 
         <!-- ======= Call To Action Section ======= -->
@@ -89,11 +114,11 @@
         <!-- End Call To Action Section -->
 
         <!-- ======= On Focus Section ======= -->
-        @include('frontend.partials.section.OnFocus')
+        {{-- @include('frontend.partials.section.OnFocus') --}}
         <!-- End On Focus Section -->
 
         <!-- ======= Features Section ======= -->
-        @include('frontend.partials.section.Features')
+        {{-- @include('frontend.partials.section.Features') --}}
         <!-- End Features Section -->
 
         <!-- ======= Services Section ======= -->
@@ -105,7 +130,7 @@
         <!-- End Testimonials Section -->
 
         <!-- ======= F.A.Q Section ======= -->
-        @include('frontend.partials.section.faq')
+        {{-- @include('frontend.partials.section.faq') --}}
         <!-- End F.A.Q Section -->
 
         <!-- ======= Portfolio Section ======= -->
@@ -113,7 +138,7 @@
         <!-- End Portfolio Section -->
 
         <!-- ======= Team Section ======= -->
-        @include('frontend.partials.section.Team')
+        {{-- @include('frontend.partials.section.Team') --}}
         <!-- End Team Section -->
 
         <!-- ======= Recent Blog Posts Section ======= -->
@@ -135,7 +160,7 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-info">
-                            <h3>HeroBiz</h3>
+                            <h3>{{ $parameter['website_name'] }}</h3>
                             <p>
                                 {{ $parameter['address'] }}
                                 <br>
@@ -145,35 +170,14 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 footer-links">
+                    <div class="col-lg-2 col-md-6 footer-links" style="margin-left: 50%">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#about">About us</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Services</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#portfolio">Portfolio</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#contact">Contact Us</a></li>
                         </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-
                     </div>
 
                 </div>
@@ -194,16 +198,16 @@
                         <!-- You can delete the links only if you purchased the pro version. -->
                         <!-- Licensing information: https://bootstrapmade.com/license/ -->
                         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        Designed by <a href="https://bootstrapmade.com/">{{ $parameter['website_name'] }}</a>
                     </div>
                 </div>
 
                 <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.twitter.com/{{ $parameter['twitter'] }}" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="https://www.facebook.com/{{ $parameter['facebook'] }}" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.instagram.com/{{ $parameter['instagram'] }}" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.skype.com/{{ $parameter['skype'] }}" class="google-plus"><i class="bi bi-skype"></i></a>
+                    <a href="https://id.linkedin.com/{{ $parameter['linkedin'] }}" class="linkedin"><i class="bi bi-linkedin"></i></a>
                 </div>
 
             </div>
@@ -222,7 +226,8 @@
     <script src="{{ asset('frontend/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendor/php-email-form/validate.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script> --}}
+    {{-- <script src="{{ asset('frontend/assets/vendor/php-email-form/validate.js') }}"></script> --}}
 
     <!-- Template Main JS File -->
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>

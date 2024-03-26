@@ -14,7 +14,7 @@ class PortofolioController extends Controller
      */
     public function index()
     {
-        $porto = Portofolio::all();
+        $porto = Portofolio::paginate(5);
 
         return view('backend.pages.portofolio.index', compact('porto'));
     }
@@ -32,12 +32,17 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+
             $request->validate([
                 'judul' => 'required',
                 'link' => 'required',
-                'image' => 'required|file|mimes:png,jpg,jpeg',
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:3072',
                 'description' => 'required',
+            ], [
+                'image.required'=>'the image field is Required',
+                'image.image' => 'the file must be image',
+                'image.mimes' => 'the image must be png/jpg/jpeg',
+                'image.max' => 'the image size must be 3MB or lower',
             ]);
             
             $porto = new Portofolio;
@@ -53,8 +58,6 @@ class PortofolioController extends Controller
                 $filename = time().'.'.$extension;
                 $file->move('uploads/porto/', $filename);
                 $porto->image = $filename;
-            }else{
-                throw new \Exception('Error adding an image');
             }
 
             $porto->save();
@@ -63,12 +66,7 @@ class PortofolioController extends Controller
                 'alert'=>'success',
                 'message'=>'Portofolio added.'
             ]);
-        } catch (\Exception $e){
-            return redirect()->back()->with([
-                'alert'=>'success',
-                'message'=>$e->getMessage(),
-            ]);
-        }
+        
     }
 
     /**
@@ -94,12 +92,16 @@ class PortofolioController extends Controller
      */
     public function update(Request $request, Portofolio $porto, $id)
     {   
-        try{
+        
             $request->validate([
                 'judul' => 'required',
                 'link' => 'required',
                 'description' => 'required',
-                'image' => 'required|file|mimes:png,jpg,jpeg',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:3072',
+            ], [
+                'image.image' => 'the file must be image',
+                'image.mimes' => 'the image must be png/jpg/jpeg',
+                'image.max' => 'the image size must be 3MB or lower',
             ]);
         
             $porto = Portofolio::findOrFail($id);
@@ -117,8 +119,6 @@ class PortofolioController extends Controller
                 $filename = time() . '.' . $extension;
                 $file->move('uploads/porto', $filename);
                 $porto->image = $filename;
-            } else {
-                throw new \Exception('Error updating an image');
             }
         
 
@@ -133,12 +133,7 @@ class PortofolioController extends Controller
                 'alert'=>'success',
                 'message'=>'Success updating portfolio.',
             ]);
-        } catch(\Exception $e){
-            return redirect()->back()->with([
-                'alert'=>'success',
-                'message'=>$e->getMessage(),
-            ]);
-        }
+            
     }
 
     /**

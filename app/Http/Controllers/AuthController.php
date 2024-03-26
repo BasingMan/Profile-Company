@@ -22,27 +22,24 @@ public function login(Request $request)
     ]);
 
     if (Auth::attempt($credentials)) {
-        return redirect('/admin')->with('success', 'Login Success');
+        $user = Auth::user();
+        
+        if ($user->role->name === 'Admin' || $user->role->name === 'User') {
+            return redirect()->route('backend.dashboard')->with('success', 'Login Success');
+        } else {
+            Auth::logout();
+            return redirect('admin/login')->withErrors(['email' => 'You are not authorized to access the admin panel.']);
+        }
     }
 
     return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
-
-    // if (Auth::attempt($credentials)) {
-    //     $user = Auth::user();
-
-    //     // Check user's role and redirect accordingly
-    //     if ($user->role === 'admin') {
-    //         return redirect()->route('admin.dashboard')->with('success', 'Login Success');
-    //     } elseif ($user->role === 'user') {
-    //         return redirect()->route('user.dashboard')->with('success', 'Login Success');
-    //     }
 }
 
 public function logout()
 {
     Auth::logout();
 
-    return redirect()->route('backend.login');
+    return redirect('admin/login');
 }
 
 }

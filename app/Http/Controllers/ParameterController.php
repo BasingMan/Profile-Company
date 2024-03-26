@@ -13,7 +13,7 @@ class ParameterController extends Controller
     public function index()
     {
         $parameters = Parameter::whereIn('key', [
-            'website_name', 'url', 'address', 'email', 'phone', 'about_us',
+            'website_name', 'logo', 'url', 'address', 'email', 'phone', 'about_us',
             'twitter', 'facebook', 'instagram', 'skype', 'linkedin'
         ])->get()->keyBy('key')->map->value;
         return view('backend.pages.pengaturan.index', ['data' => $parameters]);
@@ -27,9 +27,18 @@ class ParameterController extends Controller
     {
         try {
             foreach ($request->except(['_token', '_method']) as $key => $value) {
-                Parameter::where('key', $key)->update([
-                    'value' => $value
-                ]);
+                if ($key === 'logo' && $request->hasFile('logo')) {
+                    $logo = $request->file('logo');
+                    $filename = 'logo.' . $logo->getClientOriginalExtension();
+                    $logo->move(public_path('uploads/logo/'), $filename);
+                    Parameter::where('key', $key)->update([
+                        'value' => $filename
+                    ]);
+                } else {
+                    Parameter::where('key', $key)->update([
+                        'value' => $value
+                    ]);
+                }
             }
             return redirect()->route('backend.pengaturan.index')->with([
                 'alert'     => 'success',

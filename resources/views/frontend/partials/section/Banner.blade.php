@@ -1,14 +1,33 @@
-<section id="hero-animated" class="hero-animated d-flex align-items-center" id="home">
-    <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-        data-aos="zoom-out">
-        <img src="{{ asset('frontend/assets/img/hero-carousel/hero-carousel-3.svg') }}" class="img-fluid animated">
-        <h2>Welcome to <span>HeroBiz</span></h2>
-        <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
-        <div class="d-flex">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                class="glightbox btn-watch-video d-flex align-items-center"><i
-                    class="bi bi-play-circle"></i><span>Watch Video</span></a>
+<section style="margin-top: 30px">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @if ($sliders->isEmpty())
+            <div class="carousel-item active">
+                <div class="text-center" style="margin-top: 80px">
+                    <h3 class="mx-auto mt-16">No Banners yet</h3>
+                </div>
+            </div>
+            @else
+            @foreach ($sliders as $key => $slider)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <a href="{{ $slider->link }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ asset('uploads/slider/' . $slider->gambar) }}" class="d-block w-100" style="max-height: 600px;" alt="">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ $slider->title }}</h5>
+                        <p>{{ $slider->subtitle }}</p>
+                    </div>
+                </div>
+            @endforeach
+        @endif
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </section>

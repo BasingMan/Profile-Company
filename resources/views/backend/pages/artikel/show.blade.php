@@ -17,6 +17,8 @@
         background-color: #47fdf4; 
     }
 </style>
+
+<div class="sidebar-adjustable">
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">Article Management</h6>
@@ -40,4 +42,5 @@
         </div>
     </div>
   </div>
+</div>
 @endsection

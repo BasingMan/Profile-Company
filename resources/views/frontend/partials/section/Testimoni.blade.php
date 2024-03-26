@@ -25,7 +25,7 @@
                 @foreach ($testimonies as $testimoni)
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="{{ asset($testimoni->image_path ?? 'No Image') }}" class="testimonial-img" alt="">
+                            <img src="{{ asset('uploads/testi/' . $testimoni->image_testi ?? '') }}" class="testimonial-img" alt="">
                             <h3>{{ $testimoni->name }}</h3>
                             <h4>{{ $testimoni->company }}</h4>
                             <div class="stars">
@@ -35,7 +35,7 @@
                             </div>
                             <p>
                                 <i class="bi bi-quote quote-icon-left"></i>
-                                {{ $testimoni->testimoni }}
+                                {{ Str::limit($testimoni->testimoni, 35) }}
                                 <i class="bi bi-quote quote-icon-right"></i>
                             </p>
                         </div>

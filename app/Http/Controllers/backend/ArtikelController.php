@@ -13,7 +13,7 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $art = Artikel::all();
+        $art = Artikel::paginate(5);
 
         return view('backend.pages.artikel.index', compact('art'));
     }
@@ -31,11 +31,11 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        
             $request->validate([
                 'header' => 'required',
                 'article' => 'required',
-                'image_art' => 'required|image|mimes:png,jpg,jpeg',
+                'image_art' => 'required|image|mimes:png,jpg,jpeg|max:5120',
                 'tgl' => 'required|date',
             ], [
                 'image_art.image' => 'File must be an image',
@@ -61,8 +61,6 @@ class ArtikelController extends Controller
                     $filename = time().'.'.$extension;
                     $file->move('uploads/art/', $filename);
                     $art->image_art = $filename;
-                } else {
-                    throw new \Exception('Error Uploading Image.');
                 }
             }
             
@@ -70,14 +68,8 @@ class ArtikelController extends Controller
             
             return redirect()->route('backend.art.index')->with([
                 'alert'     => 'success',
-                'message'   => 'Article berhasil diubah'
+                'message'   => 'Article berhasil ditambahkan'
             ]);
-        }catch (\Exception $e){
-            return redirect()->back()->with([
-                'alert'     => 'success',
-                'message'   => $e->getMessage(),
-            ]);
-        }
         
     }
 
@@ -104,13 +96,13 @@ class ArtikelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artikel $artikel, $id)
+    public function update(Request $request, $id)
     {
-        try{
+        
             $request->validate([
                 'header' => 'required',
                 'article' => 'required',
-                'image_art' => 'required|image|mimes:png,jpg,jpeg',
+                'image_art' => 'nullable|image|mimes:png,jpg,jpeg|max:5120',
                 'tgl' => 'required|date',
             ], [
                 'image_art.image' => 'File must be an image',
@@ -136,9 +128,7 @@ class ArtikelController extends Controller
                     $filename = time().'.'.$extension;
                     $file->move('uploads/art/', $filename);
                     $art->image_art = $filename;
-                } else {
-                    throw new \Exception('Error Updating Image.');
-                }
+                } 
             }
             
             $art->save();
@@ -147,12 +137,6 @@ class ArtikelController extends Controller
                 'alert' => 'success',
                 'message' => 'Success Updating Article',
             ]);
-        } catch(\Exception $e){
-            return redirect()->back()->with([
-                'alert' => 'error',
-                'message' => $e->getMessage(),
-            ]);
-        }
     }
 
     /**

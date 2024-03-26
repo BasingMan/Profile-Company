@@ -2,6 +2,8 @@
 
 @section('main')
     @include('backend.partials.message')
+
+<div class="sidebar-adjustable">
     <div class="card">
         <div class="card-header">
             <div class="h3">Pengaturan</div>
@@ -69,4 +71,5 @@
             </form>
         </div>
     </div>
+</div>
 @endsection

@@ -1,6 +1,7 @@
 @extends('backend.layouts.admin_layout')
 @section('main')
     @include('backend.partials.message')
+<div class="sidebar-adjustable">
   <div class="card">
     <div class="card-header">
         <div class="h3">Add User</div>
@@ -43,11 +44,11 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <div class="d-flex"><button class="btn btn-primary">Save</button></div>
+                    <div class="d-flex" style="margin-top: 20px"><button class="btn btn-primary">Save</button></div>
                 </div>
             </div>
         </form>
     </div>
-    <div class=""></div>
+  </div>
 </div>
 @endsection

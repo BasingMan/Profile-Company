@@ -16,16 +16,13 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated
         if (!Auth::check()) {
-            // Redirect to the login page if not authenticated
-            return redirect()->route('backend.login')->with('error', 'Please log in to access this page.');
+            
+            return redirect('admin/login');
         }
 
-        // // Check if the user has admin role or necessary permissions
-        // if (!$request->user()->isAdmin()) {
-        //     // Redirect to unauthorized page or handle it as needed
-        //     abort(403, 'Unauthorized access.');
+        // if (Auth::user()->role->name === 'User') {
+        //     return redirect()->route('backend.dashboard')->with('error', 'You are not authorized to access this page.');
         // }
 
         return $next($request);

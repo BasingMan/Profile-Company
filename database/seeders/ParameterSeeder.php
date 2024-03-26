@@ -19,6 +19,10 @@ class ParameterSeeder extends Seeder
                 'value' => 'Fadhlan-Attr',
             ],
             [
+                'key' => 'logo',
+                'value' => '',
+            ],
+            [
                 'key' => 'url',
                 'value' => '',
             ],

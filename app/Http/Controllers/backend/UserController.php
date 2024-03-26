@@ -14,10 +14,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function dashboard()
+    {
+        return view('backend.pages.dashboard.index');
+    }
+
+    public function userdashboard()
+    {
+        return view('backend.pages.dashboard.user');
+    }
     public function index()
     {
         
-        $data = User::with('role')->get();
+        $data = User::with('role')->paginate(5);
         $roles = Role::all();
 
         return view('backend.pages.user.index', compact('data', 'roles'));
@@ -37,7 +47,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        
             $validatedData = $request->validate([
                 'role_id' => 'required',
                 'name' => 'required|string|max:255',
@@ -60,14 +70,9 @@ class UserController extends Controller
 
             return redirect()->route('backend.user.index')->with([
                 'alert'=>'success',
-                'message'=>'Successfully deleted',
+                'message'=>'Successfully Create',
             ]);
-        }catch(\Exception $e){
-            return redirect()->back()->with([
-                'alert'=>'success',
-                'message'=>$e->getMessage(),
-            ]);
-        }
+
     }
 
     /**
@@ -100,33 +105,37 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        try{
-            $validatedData = $request->validate([
-                'role_id' => 'required',
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email,',
-            ]);
-            
-            $user = User::findOrFail($id);
-        
-            $user->role_id = $validatedData['role_id'];
-            $user->name = $validatedData['name'];
-            $user->email = $validatedData['email'];
-        
-            $user->save();
-        
-            return redirect()->route('backend.user.index')->with([
-                'alert'=>'success',
-                'message'=>'Successfully deleted',
-            ]);;
-        }catch(\Exception $e){
-            return redirect()->back()->with([
-                'alert'=>'success',
-                'message'=>$e->getMessage(),
-            ]);
+{
+    try {
+        $user = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+        ]);
+
+        if ($request->has('role_id') && $request->input('role_id') != $user->role_id) {
+            $validatedData['role_id'] = $request->input('role_id');
         }
+
+        $user->update($validatedData);
+
+        return redirect()->route('backend.user.index')->with([
+            'alert' => 'success',
+            'message' => 'User updated successfully',
+        ]);
+    } catch (ModelNotFoundException $e) {
+        return redirect()->route('backend.user.index')->with([
+            'alert' => 'success',
+            'message' => $e->getMessage(),
+        ]);
+    } catch (\Exception $e) {
+        return redirect()->back()->with([
+            'alert' => 'success',
+            'message' => $e->getMessage(),
+        ]);
     }
+}
 
     /**
      * Remove the specified resource from storage.

@@ -1,13 +1,7 @@
-<style>
-    .sidebar-item.active {
-        background-color: #1a237e;
-    }
-</style>
-
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
-            <a class="sidebar-brand" href="index.html">
+            <a class="sidebar-brand" href="#">
                 <span class="align-middle">AdminKit</span>
             </a>
 
@@ -17,14 +11,21 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#">
-                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    <a class="sidebar-link" href="{{ route('backend.dashboard') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+
+                @can('Admin')
+                    <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('backend.logo.index') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Logo</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('backend.porto.index') }}">
-                        <i class="align-middle" data-feather="user"></i> <span class="align-middle">Portofolio</span>
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Portofolio</span>
                     </a>
                 </li>
 
@@ -36,10 +37,25 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('backend.slider.index') }}">
-                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Slider</span>
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Banner</span>
                     </a>
                 </li>
 
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('backend.ser.index') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Services</span>
+                    </a>
+                </li>
+
+                @endcan
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('backend.art.index') }}">
+                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Article</span>
+                    </a>
+                </li>
+
+                @can('Admin')
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('backend.user.index') }}">
                         <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">User</span>
@@ -47,16 +63,13 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('backend.art.index') }}">
-                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Article</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link" href="/admin/pengaturan">
                         <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Pengaturan
                             Web</span>
                     </a>
                 </li>
+                @endcan
+                
             </ul>
 
 
@@ -81,4 +94,5 @@
                 item.classList.add('active');
             }
         });
+
     </script>

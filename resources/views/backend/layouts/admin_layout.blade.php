@@ -15,10 +15,156 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-    <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+    <title>Triwikrama Content Management System</title>
 
     <link href="{{ asset('backend/css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+
+    <style>
+        
+        .sidebar-item.active {
+            background-color: #1a237e;
+        }
+
+    
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            position: fixed;
+            top: 60px;
+            left: -300px; 
+            height: 100%;
+            transition: left 0.3s ease; 
+        }
+    
+        .sidebar.active {
+            left: 0; 
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff; 
+            z-index: 1000;
+            transition: top 0.3s; 
+        }
+
+      
+        .form-group {
+            transition: margin-left 0.3s ease; 
+        }
+
+        .sidebar-active .form-group {
+            margin-left: 0px; 
+        }
+       
+        .card {
+            margin-top: 50px;
+            transition: margin-left 0.3s ease; 
+        }
+        
+        .sidebar-active .card {
+            margin-left: 250px; 
+        }
+
+        .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+        }
+        .rate:not(:checked) > input {
+        position:absolute;
+        display: none;
+        }
+        .rate:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ccc;
+        }
+        .rated:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ccc;
+        }
+        .rate:not(:checked) > label:before {
+        content: '★ ';
+        }
+        .rate > input:checked ~ label {
+        color: #ffc700;
+        }
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;
+        }
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+        }
+        .star-rating-complete{
+        color: #c59b08;
+        }
+        .rating-container .form-control:hover, .rating-container .form-control:focus{
+        background: #fff;
+        border: 1px solid #ced4da;
+        }
+        .rating-container textarea:focus, .rating-container input:focus {
+        color: #000;
+        }
+        .rated {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+        }
+        .rated:not(:checked) > input {
+        position:absolute;
+        display: none;
+        }
+        .rated:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ffc700;
+        }
+        .rated:not(:checked) > label:before {
+        content: '★ ';
+        }
+        .rated > input:checked ~ label {
+        color: #ffc700;
+        }
+        .rated:not(:checked) > label:hover,
+        .rated:not(:checked) > label:hover ~ label {
+        color: #deb217;
+        }
+        .rated > input:checked + label:hover,
+        .rated > input:checked + label:hover ~ label,
+        .rated > input:checked ~ label:hover,
+        .rated > input:checked ~ label:hover ~ label,
+        .rated > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -37,6 +183,41 @@
 
     <script src="js/app.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const sidebarToggle = document.querySelector('.js-sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const navbar = document.querySelector('.navbar');
+        const forms = document.querySelectorAll('.sidebar-adjustable');
+
+        sidebarToggle.addEventListener('click', function () {
+            sidebar.classList.toggle('active');
+            navbar.classList.toggle('sticky-navbar');
+            forms.forEach(function(form) {
+                if (sidebar.classList.contains('active')) {
+                    form.classList.add('sidebar-active');
+                } else {
+                    form.classList.remove('sidebar-active');
+                }
+            });
+        });
+    });
+
+    </script>
+
+    <script>
+        window.onscroll = function() {
+            var navbar = document.getElementById('navbar');
+            if (window.pageYOffset > 0) {
+                navbar.style.top = "-" + window.pageYOffset + "px";
+            } else {
+                navbar.style.top = "0";
+            }
+        };
+    </script>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");

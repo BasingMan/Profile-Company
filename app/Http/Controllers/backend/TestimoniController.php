@@ -14,7 +14,7 @@ class TestimoniController extends Controller
      */
     public function index()
     {
-        $testi = Testimoni::all();
+        $testi = Testimoni::paginate(5);
         return view('backend.pages.testimoni.index', compact('testi'));
     }
 
@@ -31,15 +31,16 @@ class TestimoniController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        
             $request->validate([
                 'name' => 'required',
                 'company' => 'required',
                 'rating' => 'required',
-                'image_testi' => 'nullable|mimes:png,jpg,jpeg',
+                'image_testi' => 'nullable|mimes:png,jpg,jpeg|max:1024',
                 'testimoni' => 'required',
             ], [
                 'image_testi.mimes' => 'The file must be png/jpg/jpeg',
+                'image_testi.max' => 'the image size must be 1MB or lower'
             ]);
             
             $testi = new Testimoni;
@@ -63,12 +64,7 @@ class TestimoniController extends Controller
                 'alert'=>'success',
                 'message'=>'New Testimoni has been added.',
             ]);
-        }catch(\Exception $e){
-            return redirect()->back()->with([
-                'alert'=>'success',
-                'message'=>$e->getMessage(),
-            ]);
-        }
+        
     }
 
     /**
@@ -96,16 +92,16 @@ class TestimoniController extends Controller
      */
     public function update(Request $request, Testimoni $testi, $id)
     {
-        try{
+        
             $request->validate([
                 'name' => 'required',
                 'company' => 'required',
                 'rating' => 'required',
-                'image_testi' => 'nullable|mimes:png,jpg,jpeg',
+                'image_testi' => 'nullable|mimes:png,jpg,jpeg|max:1024',
                 'testimoni' => 'required', 
             ],[
-                'image_testi.image' => 'it needs to be an image file',
                 'image_testi.mimes' => 'the file must be png/jpg/jpeg',
+                'image_testi.max' => 'the image size must be 1MB or lower',
             ]);
         
             $testi = Testimoni::findOrFail($id);
@@ -138,12 +134,7 @@ class TestimoniController extends Controller
                 'alert'=>'success',
                 'message'=>'Testimoni updated',
             ]);
-        }catch(\Exception $e){
-            return redirect()->back()->with([
-                'alert'=>'success',
-                'message'=>$e->getMessage(),
-            ]);
-        }
+        
     }
 
     /**

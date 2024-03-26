@@ -17,6 +17,8 @@
     background-color: #47fdf4; 
 }
 </style>
+
+<div class="sidebar-adjustable">
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">User Management</h6>
@@ -42,13 +44,44 @@
                 <td>{{ $item->email }}</td>
                 <td>
                     <a href="{{ route('backend.user.edit', ['id' => $item->id]) }}" class="btn btn-inverse-warning">Edit</a>
-                    <a href="{{ route('backend.user.delete', ['id' => $item->id]) }}" class="btn btn-inverse-danger" id="delete">Delete</a>
+                    <a href="{{ route('backend.user.delete', ['id' => $item->id]) }}" class="btn btn-inverse-danger delete-link" >Delete</a>
                 </td>
                 </tr>
             @endforeach
                 </tbody>
             </table>
         </div>
+        <div class="pagination justify-content-center mt-5" >
+            {{ $data->links('pagination::bootstrap-4') }}
+        </div>
     </div>
   </div>
+</div>
+
+
+  <script>
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-link')) {
+            event.preventDefault();
+            confirmDelete(event.target.getAttribute('href'));
+        }
+    });
+
+    function confirmDelete(deleteUrl) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = deleteUrl;
+            }
+        });
+    }
+
+</script>
 @endsection
