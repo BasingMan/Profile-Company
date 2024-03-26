@@ -172,7 +172,7 @@
                     <div class="sidebar" style="margin-top: 30px">
                         <div class="search-form">
                             <form action="{{ route('frontend.blog') }}" method="GET" class="mt-3">
-                                <input type="text" name="query" placeholder="Search title/text on article..." value="{{ $query ?? '' }}">
+                                <input type="text" name="query" placeholder="Search the title or the text..." value="{{ $query ?? '' }}">
                                 <button type="submit"><i class="bi bi-search"></i></button>
                             </form>
                         </div>

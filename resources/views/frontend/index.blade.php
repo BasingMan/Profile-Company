@@ -7,7 +7,7 @@
 
     <title>{{ $parameter['website_name'] }}</title>
     <meta content="description" name="{{ $parameter['website_name'] }} adalah perusahaan startup, melayani apa yang dibutuhkan oleh client kita">
-    <meta content="keywords" name="Triwikrama, Startup, Layanan TI, Lowongan Kerja, Layanan Client">
+    <meta content="keywords" name="Triwikrama, Startup, Vendor Aplikasi, Lowongan Kerja, Vendor">
 
     <!-- Favicons -->
     <link href="{{ asset('frontend/assets/img/favicon.png') }}" rel="icon">
